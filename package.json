@@ -1,0 +1,75 @@
+{
+  "name": "myblog",
+  "version": "1.0.0",
+  "description": "Single page personal blog, built by React & Node.",
+  "main": "webpack.config.js",
+  "scripts": {
+    "start": "node start.js",
+    "watch": "webpack --watch --progress --color"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gisonyeung/myblog-web.git"
+  },
+  "keywords": [
+    "blog",
+    "wepack",
+    "react",
+    "node"
+  ],
+  "author": "gisonyeung",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gisonyeung/myblog/issues"
+  },
+  "homepage": "https://github.com/gisonyeung/myblog#readme",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-register": "^6.11.6",
+    "css-loader": "^0.23.1",
+    "file-loader": "^0.9.0",
+    "json-loader": "^0.5.4",
+    "jsx-loader": "^0.13.2",
+    "node-sass": "^3.8.0",
+    "open-browser-webpack-plugin": "^0.0.3",
+    "react-addons-css-transition-group": "^15.2.1",
+    "react-hot-loader": "^1.3.0",
+    "redux-logger": "^2.7.4",
+    "request": "^2.73.0",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.1",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.12.1"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "connect": "^2.30.2",
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.4.2",
+    "events": "^1.1.1",
+    "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "formidable": "^1.0.17",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.14.0",
+    "log4js": "^1.1.0",
+    "mongoose": "^4.5.7",
+    "nodemailer": "^2.5.0",
+    "react": "^15.2.1",
+    "react-cookie": "^0.4.7",
+    "react-dom": "^15.2.1",
+    "react-html5video": "^1.4.0",
+    "react-redux": "^5.0.2",
+    "react-router": "^2.6.0",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
+    "session-mongoose": "^0.5.2"
+  }
+}
