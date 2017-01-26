@@ -3,6 +3,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from "react-redux";
 import { Status } from '../constants';
 import site from '../actions/site';
+import { checkHelper } from '../utils/formCheck';
 
 class SubscribeModal extends Component {
   constructor(props) {
@@ -43,40 +44,18 @@ class SubscribeModal extends Component {
       email: this.refs.subEmail.value,
     };
 
-    /* 表单验证 */
-  	if ( !/\S/.test(formData.nickname) ) {
+    let check_result = '';
+    if ( check_result = checkHelper.nickname(formData.nickname).error ) {
+      this.handleTip('error', check_result);
+      this.refs.subNickname.focus();
+      return false;
+    } else if ( check_result = checkHelper.email(formData.email).error ) {
+      this.handleTip('error', check_result);
+      this.refs.subEmail.focus();
+      return false;
+    }
 
-  	  this.handleTip('error', '昵称不能为空');
-  	  this.refs.subNickname.focus();
-  	  return false;
-
-  	} else if ( !/\S/.test(formData.email) ) {
-
-        this.handleTip('error', '邮箱不能为空');
-        this.refs.subEmail.focus();
-        return false;
-
-  	} else if ( formData.nickname.length > 20 ) {
-
-  	  this.handleTip('error', '昵称过长');
-  	  this.refs.subNickname.focus();
-  	  return false;
-
-  	} else if ( !/^\w+@\w+\.\w+(\.\w+)?$/.test(formData.email) ) {
-
-  	  this.handleTip('error', '电子邮箱格式错误');
-  	  this.refs.subEmail.focus();
-  	  return false;
-
-  	} else if ( formData.email.length > 50 ) {
-
-  	  this.handleTip('error', '邮箱过长');
-  	  this.refs.subEmail.focus();
-  	  return false;
-
-  	}
-
-  	this.props.addSubscribe(formData);
+    this.props.addSubscribe(formData);
 
   }
 

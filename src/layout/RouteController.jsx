@@ -5,7 +5,7 @@ import Home from './Home';
 // import Mylife from './Mylife';
 // import Book from './Book';
 // import Archives from './Archives';
-// import Article from './Article';
+import Article from './Article';
 // import WalkBlogDetail from './WalkBlogDetail';
 // import Board from './Board';
 // import About from './About';
@@ -31,8 +31,8 @@ class RouteController extends Component {
       <Router history={browserHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={Home} onEnter={addPage} onChange={addPage_change}/>
-          {/*
           <Route path="/article/:articleId" component={Article}  />
+          {/*
           <Route path="/mylife" component={Mylife} />
           <Route path="/mylife/:postId" component={WalkBlogDetail} />
           <Route path="/book" component={Book} />

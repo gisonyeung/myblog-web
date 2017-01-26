@@ -2,13 +2,13 @@ const HOST = 'http://localhost:8000'
 
 const Api = {
 	blogCount: '/blogCount',
-	fetchBlogByPage: HOST + '/homeBlog',
+	getBlogsByPage: HOST + '/homeBlog',
 	getBlogTotalPage: HOST + '/homePage',
-	blogDetail: '/blogDetail',
-	nearBlog: '/nearBlog',
+	getBlogDetail: HOST + '/blogDetail',
+	getNearBlog: HOST + '/nearBlog',
 	blogComment: '/blogComment',
 	addBlogComment: '/addBlogComment',
-	addBlogLike: '/addBlogLike',
+	addBlogLike: HOST + '/addBlogLike',
 	walkingBlog: '/walkingBlog',
 	walkingBlogMore: '/walkingBlogMore',
 	walkingBlogDetail: '/walkingBlogDetail',

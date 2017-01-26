@@ -171,7 +171,8 @@ body {
 	right: 0;
 	color: #333;
 	z-index: 2000;
-	cursor: pointer;
+	@include transform(translateZ(0));
+	// cursor: pointer;
 	
 	.mask {
 		position: absolute;
