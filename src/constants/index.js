@@ -32,7 +32,6 @@ const Site = {
 }
 
 const Comment = {
-
   BOARD_FETCH_REQUEST: 'BOARD_FETCH_REQUEST_COMMENT',
   BOARD_FETCH_RECEIVE: 'BOARD_FETCH_RECEIVE_COMMENT',
   BOARD_FETCH_FAIELD: 'BOARD_FETCH_FAIELD_COMMENT',
@@ -50,4 +49,5 @@ export {
 	Status,
 	Blog,
 	Site,
+  Comment,
 }

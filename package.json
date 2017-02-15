@@ -4,7 +4,7 @@
   "description": "Single page personal blog, built by React & Node.",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "node start.js",
+    "start": "webpack --watch --progress --color --d",
     "watch": "webpack --watch --progress --color"
   },
   "repository": {
