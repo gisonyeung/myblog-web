@@ -7,7 +7,7 @@ import Home from './Home';
 // import Archives from './Archives';
 import Article from './Article';
 // import WalkBlogDetail from './WalkBlogDetail';
-// import Board from './Board';
+import Board from './Board';
 // import About from './About';
 // import CancelSub from './CancelSub';
 
@@ -31,13 +31,14 @@ class RouteController extends Component {
       <Router history={browserHistory}>
         <Route path="/" component={App}>
           <IndexRoute component={Home} onEnter={addPage} onChange={addPage_change}/>
+          <Route path="/board" component={Board} />
+          {/*
           <Route path="/article/:articleId" component={Article}  />
           {/*
           <Route path="/mylife" component={Mylife} />
           <Route path="/mylife/:postId" component={WalkBlogDetail} />
           <Route path="/book" component={Book} />
           <Route path="/archives" component={Archives} />
-          <Route path="/board" component={Board} />
           <Route path="/about" component={About} />
           <Route path="/unsubscribe" component={CancelSub} />
         */}

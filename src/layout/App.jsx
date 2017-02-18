@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Nav from './Nav';
 // import SiteAction from '../actions/SiteAction';
 
+require('../sources/sass/Layout.scss');
+
 class App extends Component {
   
   componentDidMount() {
