@@ -70,6 +70,17 @@ const currentBlog = (state = blog_state_initial, action) => {
   }
 }
 
+
+const comment_state_initial = {
+  
+}
+
+const comment = (state = comment_state, action) => {
+  switch(action.type) {
+    
+  }
+}
+
 export default combineReducers({
 	blogList,
   currentBlog,
