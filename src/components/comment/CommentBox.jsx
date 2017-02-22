@@ -41,7 +41,7 @@ class CommentBox extends Component{
          && addStatus.status === Status.DONE ) {
       this.handleTip('success', '发表评论成功');
       this.refs.content.value = '';
-      this.props.initComment();
+      this.props.initComment(this.props.blogId);
       setTimeout(() => {
         smoothScoll.toAnchor('comment')
       }, 300);
@@ -72,6 +72,7 @@ class CommentBox extends Component{
     }
 
     let formData = {
+      blogId: this.props.blogId || -1,
       nickname: this.refs.nickname.value,
       email: this.refs.email.value,
       content: this.refs.content.value,

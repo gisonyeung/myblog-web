@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { connect } from "react-redux";
 import ArticleContent from '../components/blog/ArticleContent';
 import ArticleHot from './ArticleHot';
-// import ArticleComment from './ArticleComment';
+import ArticleComment from './ArticleComment';
 import blog from '../actions/blog';
 import { Status } from '../constants';
 
@@ -63,13 +63,13 @@ class ArticlePanel extends Component {
           />
           : ''
         }
-        {/*
+        {
           fetchStatus.status === Status.DONE ?
           <ArticleComment
             blogId={blog.blogId || -1}
           />
           : ''
-        */}
+        }
       </div>
     )
   }

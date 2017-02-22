@@ -32,8 +32,8 @@ class RouteController extends Component {
         <Route path="/" component={App}>
           <IndexRoute component={Home} onEnter={addPage} onChange={addPage_change}/>
           <Route path="/board" component={Board} />
+          <Route path="/article/:articleId" component={Article}/>
           {/*
-          <Route path="/article/:articleId" component={Article}  />
           {/*
           <Route path="/mylife" component={Mylife} />
           <Route path="/mylife/:postId" component={WalkBlogDetail} />

@@ -59,12 +59,57 @@ const quote_board = (quoteData) => (dispatch, getState) => {
   });
 }
 
+// 初始化评论 博客
+const initComment_blog = (blogId) => (dispatch) => {
+  dispatch(network.requestAction(Comment.BLOG_FETCH_REQUEST));
+  fetch.POST(Api.getBlogComment, { blogId })
+  .then(data => {
+    if ( data.result !== 'success' ) {
+      dispatch(network.failAction(Comment.BLOG_FETCH_FAIELD, data.result));
+      return false;
+    }
+    dispatch(network.receiveAction(Comment.BLOG_FETCH_RECEIVE, data));
+  })
+  .catch(err => {
+  dispatch(network.failAction(Comment.BLOG_FETCH_FAIELD, err));
+  });
+}
+
+const addComment_blog = (formData) => (dispatch, getState) => {
+  dispatch(network.requestAction(Comment.BLOG_ADD_REQUEST));
+  fetch.POST(Api.addBlogComment, formData)
+  .then(data => {
+    if ( data.result !== 'success' ) {
+      dispatch(network.failAction(Comment.BLOG_ADD_FAIELD, data.result));
+      return false;
+    }
+    dispatch(network.receiveAction(Comment.BLOG_ADD_RECEIVE, data));
+  })
+  .catch(err => {
+  dispatch(network.failAction(Comment.BLOG_ADD_FAIELD, err));
+  });
+}
+
+const quote_blog = (quoteData) => (dispatch, getState) => {
+  dispatch({
+    type: Comment.BLOG_QUOTE,
+    payload: Object.assign({}, quoteData),
+  });
+}
+
+
 export default {
   board: {
     init: initComment_board,
     more: fetchMoreComment_board,
     add: addComment_board,
     quote: quote_board,
-  }
+  },
+  blog: {
+    init: initComment_blog,
+    add: addComment_blog,
+    quote: quote_blog,
+  },
+
   
 }

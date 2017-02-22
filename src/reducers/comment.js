@@ -51,6 +51,45 @@ const board = (state = board_state_initial, action) => {
   }
 }
 
+const blog_state_initial = {
+  comments: [],
+  total: 0,
+  pos: 0,
+  fetchStatus: getStatus(),
+  addStatus: getStatus(),
+  quoteData: {},
+  forceUpdate: false,
+}
+
+const blog = (state = blog_state_initial, action) => {
+  switch(action.type) {
+    case Comment.BLOG_FETCH_REQUEST:
+      return Object.assign({}, state, { fetchStatus: getStatus(Status.FETCHING) });
+    case Comment.BLOG_FETCH_RECEIVE:
+      return Object.assign({}, state, { 
+        fetchStatus: getStatus(Status.DONE), 
+        comments: action.payload.comments,
+        total: action.payload.allCount,
+        pos: action.payload.comments.length,
+      });
+    case Comment.BLOG_FETCH_FAIELD:
+      return Object.assign({}, state, { fetchStatus: getStatus(Status.FAILED, action.payload) });
+    case Comment.BLOG_ADD_REQUEST:
+      return Object.assign({}, state, { addStatus: getStatus(Status.FETCHING) });
+    case Comment.BLOG_ADD_RECEIVE:
+      return Object.assign({}, state, { addStatus: getStatus(Status.DONE, action.payload), quoteData: {} });
+    case Comment.BLOG_ADD_FAIELD:
+      return Object.assign({}, state, { addStatus: getStatus(Status.FAILED, action.payload) });
+    case Comment.BLOG_QUOTE:
+      return Object.assign({}, state, { quoteData: action.payload, addStatus: getStatus(), forceUpdate: !state.forceUpdate });
+    default:
+      return state;
+  }
+}
+
+
+
 export default combineReducers({
-	board,
+  board,
+	blog,
 });
