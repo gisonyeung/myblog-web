@@ -9,6 +9,9 @@ const board_state_initial = {
   pos: 0,
   hasCommentInit: false,
   fetchStatus: getStatus(),
+  addStatus: getStatus(),
+  quoteData: {},
+  forceUpdate: false,
 }
 
 const board = (state = board_state_initial, action) => {
@@ -35,6 +38,14 @@ const board = (state = board_state_initial, action) => {
       });
     case Comment.BOARD_MORE_FAIELD:
       return Object.assign({}, state, { fetchStatus: getStatus(Status.FAILED, action.payload) });
+    case Comment.BOARD_ADD_REQUEST:
+      return Object.assign({}, state, { addStatus: getStatus(Status.FETCHING) });
+    case Comment.BOARD_ADD_RECEIVE:
+      return Object.assign({}, state, { addStatus: getStatus(Status.DONE, action.payload), quoteData: {} });
+    case Comment.BOARD_ADD_FAIELD:
+      return Object.assign({}, state, { addStatus: getStatus(Status.FAILED, action.payload) });
+    case Comment.BOARD_QUOTE:
+      return Object.assign({}, state, { quoteData: action.payload, addStatus: getStatus(), forceUpdate: !state.forceUpdate });
     default:
       return state;
   }

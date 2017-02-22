@@ -25,6 +25,10 @@ class BoardPanel extends Component {
           type="board"
           loadMore={this.props.loadMore}
           addComment={this.props.addComment}
+          fetchStatus={this.props.fetchStatus}
+          addStatus={this.props.addStatus}
+          initComment={this.props.initComment}
+          quoteData={this.props.quoteData}
         />
       </div>
     )
@@ -38,7 +42,7 @@ const mapStateToProps = (state) => {
 } 
 
 const mapDispatchToProps = (dispatch) => ({
-  handleQueot: () => {},
+  handleQuote: (quoteData) => dispatch(comment.board.quote(quoteData)),
   initComment: () => dispatch(comment.board.init()),
   loadMore: (pos) => dispatch(comment.board.more(pos)),
   addComment: (formData) => dispatch(comment.board.add(formData)),

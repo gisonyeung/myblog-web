@@ -10,7 +10,7 @@ class CommentItem extends Component {
   }
 
   render() {
-    const { comment } = this.props
+    const { comment } = this.props;
     return (
       <div className="comment">
         <div className="cm-top clearfix">
@@ -24,7 +24,7 @@ class CommentItem extends Component {
             <span className="time">{dateFormat(comment.time, "YYYY-MM-DD hh:mm:ss")}</span>
           </p>
           <p className="handle">
-            <span className="quote" onClick={this.props.handleQuote} title="当您引用对方评论时，系统将会通过邮件通知对方">引用</span>
+            <span className="quote" onClick={this.handleQuote.bind(this)} title="当您引用对方评论时，系统将会通过邮件通知对方">引用</span>
             <span className="floor">{this.props.floor}楼</span>
           </p>
         </div>

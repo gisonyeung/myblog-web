@@ -50,6 +50,8 @@ const Comment = {
   BOARD_ADD_REQUEST: 'BOARD_ADD_REQUEST_COMMENT',
   BOARD_ADD_RECEIVE: 'BOARD_ADD_RECEIVE_COMMENT',
   BOARD_ADD_FAIELD: 'BOARD_ADD_FAIELD_COMMENT',
+  BOARD_QUOTE: 'BOARD_QUOTE_COMMENT',
+}
 
 // 留言板
 const Board = {
@@ -68,12 +70,10 @@ const Board = {
 }
 
 
-
-}
-
 export {
 	Status,
 	Blog,
 	Site,
   Comment,
+  Board,
 }

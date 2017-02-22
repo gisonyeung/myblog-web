@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 import cookie from 'react-cookie';
 import infoCache from '../../utils/infoCache';
+import { checkHelper } from '../../utils/formCheck';
+import formatter from '../../utils/formatter';
+import smoothScoll from '../../utils/smoothScoll';
+import { Status } from '../../constants';
 
 class CommentBox extends Component{
   constructor(props) {
@@ -30,6 +34,28 @@ class CommentBox extends Component{
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { addStatus, quoteData } = nextProps;
+
+    if ( addStatus.status !== this.props.addStatus.status 
+         && addStatus.status === Status.DONE ) {
+      this.handleTip('success', '发表评论成功');
+      this.refs.content.value = '';
+      this.props.initComment();
+      setTimeout(() => {
+        smoothScoll.toAnchor('comment')
+      }, 300);
+    } else if ( addStatus.status === Status.FAILED ) {
+      this.handleTip('error', addStatus.msg);
+    }
+
+    if (quoteData.content) {
+      this.quoteComment(quoteData);
+      this.handleFocus(); // 开发时发现此版本 React 的 onFocus 事件不能通过 focus() 触发，所以这里主动触发
+    }
+
+  }
+
   handleFocus() {
     if( !this.state.isOn ) {
       this.setState({
@@ -40,72 +66,47 @@ class CommentBox extends Component{
 
   handleClick() {
 
-    const that = this;
+    if ( this.props.addStatus.status === Status.FETCHING ) {
+      this.handleTip('error', '发布评论中，请勿重复操作');
+      return false;
+    }
 
     let formData = {
-      nickname: that.refs.nickname.value,
-      email: that.refs.email.value,
-      content: that.refs.content.value,
-      website: that.refs.website.value,
+      nickname: this.refs.nickname.value,
+      email: this.refs.email.value,
+      content: this.refs.content.value,
+      website: this.refs.website.value,
+      quoteData: this.props.quoteData,
     }
 
-    
-    /*
-      表单验证
-    */
-    if ( !/\S/.test(formData.content.replace(/<blockquote>[\s\S]*<\/blockquote>/g, '')) ) {
-      this.handleTip('error', '评论内容不能为空');
+    let check_result = '';
+    if ( check_result = checkHelper.content(formData.content).error ) {
+      this.handleTip('error', check_result);
       this.refs.content.focus();
-      return false;
-    } else if ( !/\S/.test(formData.nickname) ) {
-      this.handleTip('error', '昵称不能为空');
+    } else if ( check_result = checkHelper.nickname(formData.nickname).error ) {
+      this.handleTip('error', check_result);
       this.refs.nickname.focus();
-      return false;
-    } else if ( !/\S/.test(formData.email) ) {
-      this.handleTip('error', '电子邮箱不能为空');
+    } else if ( check_result = checkHelper.email(formData.email).error ) {
+      this.handleTip('error', check_result);
       this.refs.email.focus();
-      return false;
-    } else if ( !/^\w+@\w+\.\w+(\.\w+)?$/.test(formData.email) ) {
-      this.handleTip('error', '电子邮箱格式错误');
-      this.refs.email.focus();
-      return false;
-    } else if ( formData.content.length > 1500 ) {
-      this.handleTip('error', '评论内容过长');
-      this.refs.content.focus();
-      return false;
-    } else if ( formData.nickname.length > 15 ) {
-      this.handleTip('error', '昵称过长');
-      this.refs.nickname.focus();
-      return false;
-    } else if ( formData.email.length > 50 ) {
-      this.handleTip('error', '电子邮箱过长');
-      this.refs.email.focus();
-      return false;
-    }  else if ( formData.website.length > 100 ) {
-      this.handleTip('error', '个人网站过长');
+    } else if ( check_result = checkHelper.website(formData.website).error ) {
+      this.handleTip('error', check_result);
       this.refs.website.focus();
-      return false;
-    } 
-    /*
-      个人网站不为空时，检测有无https?://前缀，无则添加http://
-    */
-    if ( /\S/.test(formData.website) ) {
-      formData.website = formData.website.replace(/^(https?:\/\/)?.*/, function(match, capture) {
-        // 有捕获组，已有前缀
-        if ( capture ) {
-          return match;
-        } else {
-          return 'http://' + match;
-        }
-      });
     }
 
+    if ( check_result ) { return false; }
+
+    formData.website = formatter.website(formData.website);
     infoCache.save(formData, this.refs.remember.checked);
-    
     this.clearTip();
+    this.props.addComment(formData);
+  }
 
-    // BlogAction.sendBoardComment(formData);
-
+  quoteComment(data) {
+    data.content = data.content.replace(/<blockquote>[\s\S]*<\/blockquote>\n?/, '');
+    let prefixComment = `<blockquote>\n<pre>引用 ${data.user.nickname} 的发言：</pre>\n\n${data.content}\n\n</blockquote>\n`;
+    this.refs.content.value = prefixComment + this.refs.content.value.replace(/<blockquote>[\s\S]*<\/blockquote>\n?/, '');
+    this.refs.content.focus();
   }
 
   handleTip(type, text) {

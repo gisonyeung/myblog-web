@@ -25,6 +25,10 @@ class CommentPanel extends Component {
         <CommentBox 
           blogId={this.props.blogId} 
           type={this.props.type}
+          addComment={this.props.addComment}
+          addStatus={this.props.addStatus}
+          initComment={this.props.initComment}
+          quoteData={this.props.quoteData}
         />
       </div>
     )

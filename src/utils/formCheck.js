@@ -63,14 +63,35 @@ const checkHelper = {
     }
   },
   email(str) {
-  	if ( checkHelper.isEmptyStr(str) ) {
-  	  return _resHandler('邮箱不能为空');
-  	} else if ( !/^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/.test(str) ) {
-  	  return _resHandler('电子邮箱格式错误');
-  	} else {
-  	  return _resHandler();
-  	}
+    if ( checkHelper.isEmptyStr(str) ) {
+      return _resHandler('邮箱不能为空');
+    } else if ( !/^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/.test(str) ) {
+      return _resHandler('电子邮箱格式错误');
+    } else {
+      return _resHandler();
+    }
+  },
+  content(str) {
+    if ( checkHelper.isEmptyStr(str.replace(/<blockquote>[\s\S]*<\/blockquote>/g, '')) ) {
+      return _resHandler('评论内容不能为空');
+    } else if ( str.length > 1500 ) {
+      return _resHandler('评论内容过长');
+    } else {
+      return _resHandler();
+    }
+  },
+  website(str) {
+    if ( checkHelper.isEmptyStr(str) ) {
+      return _resHandler();
+    }
+
+    if ( str.length > 100 ) {
+      return _resHandler('个人网站过长');
+    } else {
+      return _resHandler();
+    }
   }
+
 
 };
 

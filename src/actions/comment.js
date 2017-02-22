@@ -52,11 +52,19 @@ const addComment_board = (formData) => (dispatch, getState) => {
   });
 }
 
+const quote_board = (quoteData) => (dispatch, getState) => {
+  dispatch({
+    type: Comment.BOARD_QUOTE,
+    payload: Object.assign({}, quoteData),
+  });
+}
+
 export default {
   board: {
     init: initComment_board,
     more: fetchMoreComment_board,
     add: addComment_board,
+    quote: quote_board,
   }
   
 }
