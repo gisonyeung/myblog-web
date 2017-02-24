@@ -33,7 +33,7 @@ const fetchMoreComment_board = (pos) => (dispatch) => {
     dispatch(network.receiveAction(Comment.BOARD_MORE_RECEIVE, data));
   })
   .catch(err => {
-  dispatch(network.failAction(Comment.BOARD_MORE_FAIELD, err));
+    dispatch(network.failAction(Comment.BOARD_MORE_FAIELD, err));
   });
 }
 
@@ -48,7 +48,7 @@ const addComment_board = (formData) => (dispatch, getState) => {
     dispatch(network.receiveAction(Comment.BOARD_ADD_RECEIVE, data));
   })
   .catch(err => {
-  dispatch(network.failAction(Comment.BOARD_ADD_FAIELD, err));
+    dispatch(network.failAction(Comment.BOARD_ADD_FAIELD, err));
   });
 }
 
@@ -71,7 +71,7 @@ const initComment_blog = (blogId) => (dispatch) => {
     dispatch(network.receiveAction(Comment.BLOG_FETCH_RECEIVE, data));
   })
   .catch(err => {
-  dispatch(network.failAction(Comment.BLOG_FETCH_FAIELD, err));
+    dispatch(network.failAction(Comment.BLOG_FETCH_FAIELD, err));
   });
 }
 
@@ -86,7 +86,7 @@ const addComment_blog = (formData) => (dispatch, getState) => {
     dispatch(network.receiveAction(Comment.BLOG_ADD_RECEIVE, data));
   })
   .catch(err => {
-  dispatch(network.failAction(Comment.BLOG_ADD_FAIELD, err));
+    dispatch(network.failAction(Comment.BLOG_ADD_FAIELD, err));
   });
 }
 

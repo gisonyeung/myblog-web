@@ -8,7 +8,7 @@ import Home from './Home';
 import Article from './Article';
 // import WalkBlogDetail from './WalkBlogDetail';
 import Board from './Board';
-// import About from './About';
+import About from './About';
 // import CancelSub from './CancelSub';
 
 const addPage = (nextStage, replace) => {
@@ -39,9 +39,9 @@ class RouteController extends Component {
           <Route path="/mylife/:postId" component={WalkBlogDetail} />
           <Route path="/book" component={Book} />
           <Route path="/archives" component={Archives} />
-          <Route path="/about" component={About} />
           <Route path="/unsubscribe" component={CancelSub} />
         */}
+          <Route path="/about" component={About} />
           <Redirect from="/*" to="/" />
         </Route>
     </Router>

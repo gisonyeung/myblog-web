@@ -29,6 +29,8 @@ class BoardPanel extends Component {
           addStatus={this.props.addStatus}
           initComment={this.props.initComment}
           quoteData={this.props.quoteData}
+          pos={this.props.pos}
+          total={this.props.total}
         />
       </div>
     )
